@@ -14,3 +14,18 @@ body {
     width: auto;
 }
 
+#login_bloc {
+    display: flex;
+    margin-top: 15%;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.champs {
+    margin-bottom: 5%;
+}
+
+#connexion {
+    margin-bottom: 5%;
+}
