@@ -5,7 +5,7 @@ body {
    }
 
 .navbar {
-    background: #F2CF5A;
+    background: #FFCE2B;
     justify-content: center;
 }
 
@@ -16,9 +16,10 @@ body {
 
 #login_bloc {
     display: flex;
-    margin-top: 15%;
+    margin-top: 5%;
     align-items: center;
     flex-direction: column;
+    border: solid black 1px;
     
 }
 
@@ -28,4 +29,5 @@ body {
 
 #connexion {
     margin-bottom: 5%;
+
 }
