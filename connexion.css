@@ -1,0 +1,16 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background: #f2f6e9;
+   }
+
+.navbar {
+    background: #F2CF5A;
+    justify-content: center;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
