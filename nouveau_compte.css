@@ -1,0 +1,17 @@
+.navbar {
+    background: #FFCE2B;
+    justify-content: center;
+}
+.logo {
+    height: 50px;
+    width: auto;
+}
+.row {
+    margin-top: 5%;
+}
+
+
+.inscription {
+   
+    border: solid black 1px;
+}

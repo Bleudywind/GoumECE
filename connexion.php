@@ -23,11 +23,7 @@
                 
                     echo "Account not found";
                 }  else {
-                
-                    while ($data = mysqli_fetch_assoc($result)) {
-                    echo "Bienvenue " . $data['Prenom'] . "!<br>";
-                    }
-                
+                    header("Location: http://goumece/navbar.html");               
                 }
             }
             else {
