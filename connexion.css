@@ -15,19 +15,40 @@ body {
 }
 
 #login_bloc {
+
     display: flex;
-    margin-top: 5%;
     align-items: center;
     flex-direction: column;
-    border: solid black 1px;
+    margin-top: 20%;
+    margin-bottom: 20%;
     
 }
 
-.champs {
-    margin-bottom: 5%;
+#login_contour {
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    border: solid black 1px;
 }
 
-#connexion {
-    margin-bottom: 5%;
+.champs {
 
+    margin-bottom: 8%;
+}
+
+#connexion_text {
+    margin-bottom: 10%;
+    font-size: 20px;
+}
+
+.nav-link {
+
+    background-color: #D3D3D3;
+    color: black; 
+    cursor: pointer;
+    
+}
+
+.form-group {
+    margin-top: 10%;
 }
