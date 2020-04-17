@@ -36,5 +36,9 @@
         }
         
     }
+    if(isset($_POST["button2"]))
+    {
+        header("Location: http://goumece/nouveau_compte.html");
+    }
 
 ?>

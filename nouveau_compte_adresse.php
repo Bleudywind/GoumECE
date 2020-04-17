@@ -1,10 +1,12 @@
 <?php    
 
-    $email = isset($_POST["email"])? $_POST["email"] : "";
-    $password = isset($_POST["password"])? $_POST["password"] : "";
-    $nom = isset($_POST["nom"])? $_POST["nom"] : "";
-    $prenom = isset($_POST["prenom"])? $_POST["prenom"] : "";
-    $password_c = isset($_POST["password_c"])? $_POST["password_c"] : "";
+    $rue = isset($_POST["rue"])? $_POST["rue"] : "";
+    $ville = isset($_POST["ville"])? $_POST["ville"] : "";
+    $etat = isset($_POST["etat"])? $_POST["etat"] : "";
+    $cp = isset($_POST["cp"])? $_POST["cp"] : "";
+    $pays = isset($_POST["pays"])? $_POST["pays"] : "";
+    $num = isset($_POST["num"])? $_POST["num"] : "";
+
 
     $database = "projetwd";
     $db_handle = mysqli_connect('localhost', 'root', '');
@@ -31,7 +33,7 @@
                 }
                 else
                 {
-                         header("Location: http://goumece/nouveau_compte_adresse.html");
+                         header("Location: http://goumece/connexion.html");
                 }
             }
             else 

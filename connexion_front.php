@@ -46,7 +46,7 @@
                         <tr>
                             <td>
                                 <div class="form-group d-flex justify-content-center">
-                                    <button  class="btn btn-outline-secondary">Céation d'un nouveau compte</button>
+                                    <button  class="btn btn-outline-secondary" name="button2">Céation d'un nouveau compte</button>
                                 </div>
                             </td>
                         </tr>
