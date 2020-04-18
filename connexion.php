@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     $email = isset($_POST["email"])? $_POST["email"] : "";
     $password = isset($_POST["password"])? $_POST["password"] : "";
 
@@ -13,18 +13,39 @@
         {
             if ($email !="" && $password !="")
             {
-                $sql = "SELECT * FROM acheteur ";
-                $sql .= "WHERE Email LIKE '%$email%' ";
-                $sql .= "AND MotDePasse LIKE '%$password%' ";
+                if ($_SESSION['Role'])
+                {
+                    $sql = "SELECT * FROM vendeur ";
+                    $sql .= "WHERE Email LIKE '%$email%' ";
+                    $sql .= "AND MotDePasse LIKE '%$password%' ";
             
-                $result = mysqli_query($db_handle, $sql);
+                    $result = mysqli_query($db_handle, $sql);
 
-                if (mysqli_num_rows($result) == 0) {
-                
-                    echo "Account not found";
-                }  else {
-                    header("Location: http://goumece/navbar.html");               
+                    if (mysqli_num_rows($result) == 0) {
+                    
+                        echo "Account not found";
+                    }  else {
+                        $_SESSION['Connect'] = 1;
+                        header("Location: http://goumece/Accueil.php");               
+                    }
                 }
+                else
+                {
+                    $sql = "SELECT * FROM acheteur ";
+                    $sql .= "WHERE Email LIKE '%$email%' ";
+                    $sql .= "AND MotDePasse LIKE '%$password%' ";
+            
+                    $result = mysqli_query($db_handle, $sql);
+
+                    if (mysqli_num_rows($result) == 0) {
+                    
+                        echo "Account not found";
+                    }  else {
+                        $_SESSION['Connect'] = 1;
+                        header("Location: http://goumece/Accueil.php");               
+                    }
+                }
+                
             }
             else {
                 echo "champs non remplie";
