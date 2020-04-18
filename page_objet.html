@@ -10,25 +10,25 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
-            <div class="container">
-             <div class="col-lg-1">
-              <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
-            </div>
-            <div class="col-lg-1">
-              <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
-            </div>
-            <div class="col-lg-4">
-              <form class="recherche">
+         <div class="container">
+              <div class="col-lg-1">
+                <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
+              </div>
+              <div class="col-lg-1">
+                <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
+              </div>
+              <div class="col-lg-4">
+                <form class="recherche">
                   <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
-              </form>
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion acheteur</button>
-            </div>  
-            <div class="col-md-2">
-              <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion vendeur</button>
-            </div>
+                </form>
+              </div>
+             <div class="col-md-2">
+               <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion acheteur</button>
+             </div>  
+             <div class="col-md-2">
+               <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion vendeur</button>
+             </div>
   
               <div class="dropdown menu col-lg-1">
                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,11 +68,18 @@
                 </div>
             <div class="row">
                 <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> Ajouter un article</button>
+                <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> Acheter immédiatement</button>
             </div>
             <div class="row" style="height: 50px;">    
             </div>
             <div class="row">
-                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> Retirer</button>    
+                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md visible"> Retirer</button> 
+                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md invisible"> enchérir</button> <!-- class="invisible ou visible"-->   
+            </div>
+            <div class="row" style="height: 50px;">    
+            </div>
+            <div class="row">
+                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> meilleurs offres</button>    
             </div>
             </div>
             </div>
