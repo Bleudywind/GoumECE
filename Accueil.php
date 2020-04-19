@@ -45,21 +45,27 @@
             document.getElementById('img_1').src = "image_objet/" + image_1;
             document.getElementById('img_2').src = "image_objet/" + image_2;
             document.getElementById('img_3').src = "image_objet/" + image_3;
-            document.getElementById('lien_objet_1').href = "http://goumece/page_objet.php? id =" + image_1;
-            document.getElementById('lien_objet_2').href = "http://goumece/page_objet.php? id =" + image_2;
-            document.getElementById('lien_objet_3').href = "http://goumece/page_objet.php? id =" + image_3;
+            for (var i = 0; i < 3; ++i)
+            {
+                image_1 = image_1.charAt(0) + image_1.charAt(1);
+                image_2 = image_2.charAt(0) + image_2.charAt(1);
+                image_3 = image_3.charAt(0) + image_3.charAt(1);
+            }
+            document.getElementById('lien_objet_1').href = "http://goumece/page_objet.php?id=" + image_1;
+            document.getElementById('lien_objet_2').href = "http://goumece/page_objet.php?id=" + image_2;
+            document.getElementById('lien_objet_3').href = "http://goumece/page_objet.php?id=" + image_3;
         });
         
     </script>
-        <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
-            <div class="container">
+         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
+            <div class="container ml-5">
                 <div class="col-lg-1">
                     <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
                     <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4" style="margin-left:250px">
                     <form class="recherche">
                         <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
@@ -80,7 +86,7 @@
                         <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v"> connexion vendeur</button>
                     </div>
                 </form>
-                <div class="dropdown menu col-lg-1">
+                <div class="dropdown menu col-lg-1 mr-0" style="margin-left:100px;">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Catégories
                     </a>

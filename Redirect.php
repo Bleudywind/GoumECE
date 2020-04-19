@@ -18,7 +18,7 @@
     {
         $_SESSION['Connect'] = 0;
         $_SESSION['Role'] = 0;
-        header("Location: http://goumece/Accueil.php");
+        header("Location: http://goumece/Start_page.php");
     }
     
 ?>

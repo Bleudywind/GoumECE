@@ -10,7 +10,157 @@
         <link rel="stylesheet" type="text/css" href="page_objet.css">
     </head>
     <body>
-    
+    <?php 
+        session_start();
+        if (!isset($_SESSION['Connect']))
+        {
+            $_SESSION['Connect'] = 0;
+        }
+        if ($_SESSION['Connect'])
+        {
+            $guest_id = $_SESSION ['ID'];
+        }
+        else
+        {
+            $guest_id = 0;
+        }
+        
+
+
+
+        $id = $_GET['id'];
+        $database = "projetwd";
+        $db_handle = mysqli_connect('localhost', 'root', '');
+        $db_found = mysqli_select_db($db_handle, $database);
+
+        $sql = "SELECT * FROM objet WHERE ID LIKE '$id'";
+        $result = mysqli_query($db_handle, $sql);
+        $data = mysqli_fetch_assoc($result);
+        $vendeur_id = $data['vendeurID'];
+        $sql = "SELECT * FROM vendeur WHERE ID LIKE '$vendeur_id'";
+        $result = mysqli_query($db_handle, $sql);
+        $data_vendeur = mysqli_fetch_assoc($result);
+
+        $categorie = $data['Categorie'];
+        $sql = "SELECT * FROM objet WHERE Categorie LIKE '$categorie'";
+        $result = mysqli_query($db_handle, $sql);
+        for ($i = 0; $i < 3; $i++)
+        {
+            if ($data_catégorie = mysqli_fetch_assoc($result))
+            {
+                if ($data_catégorie['ID'] != $id)
+                {
+                    $img_categorie[$i] = $data_catégorie['ID'];
+                    $nom_categorie[$i] = $data_catégorie['Nom'];
+                }
+                else
+                {
+                    --$i;
+                }
+            }
+            else
+            {
+                $nom_categorie[$i] = 0;
+                $img_categorie[$i] = 0;
+            }
+        }
+
+        $img_categorie_size = sizeof($img_categorie);
+
+        if(!$guest_id)
+        {
+            $autorisation = 0;
+        }
+        elseif ($_SESSION['Role'])
+        {
+            $sql = "SELECT * FROM vendeur WHERE ID LIKE '$guest_id'";
+            $result = mysqli_query($db_handle, $sql);
+            if(mysqli_num_rows($result) == 0)
+            {
+                $autorisation = 0;
+            }
+            else
+            {
+                $autorisation = 1;
+            }
+        }
+        elseif ($_SESSION['Role'] == 2)
+        {
+            $autorisation = 1;
+        }
+        else
+        {
+            $autorisation = 0;
+        }
+        
+    ?>
+    <script type="text/javascript">
+        var connect = <?php echo $_SESSION['Connect'] ?>;
+        
+
+        $(document).ready(function() {
+        if (connect)
+        {
+            document.getElementById('connect_btn_1').style.visibility = 'hidden';
+            document.getElementById('connect_btn_2').style.visibility = 'hidden';
+            document.getElementById('disconnect').style.visibility = 'visible';
+            
+            if (<?php echo $autorisation ?>)
+            {
+                document.getElementById('Enregister').style.visibility = 'visible';
+                document.getElementById('Retirer').style.visibility = 'visible';
+            }
+            else
+            {
+                document.getElementById('Enregister').style.visibility = 'hidden';
+                document.getElementById('Retirer').style.visibility = 'hidden';
+            }
+
+        }
+        else
+        {
+            document.getElementById('connect_btn_1').style.visibility = 'visible';
+            document.getElementById('connect_btn_2').style.visibility = 'visible';
+            document.getElementById('disconnect').style.visibility = 'hidden';
+            document.getElementById('Enregister').style.visibility = 'hidden';
+            document.getElementById('Retirer').style.visibility = 'hidden';
+            
+        }
+        document.getElementById('1_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".1.png";
+        document.getElementById('2_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".2.png";
+        document.getElementById('3_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".3.png";
+
+            
+        
+            document.getElementById('img_categorie_1').src = "image_objet/" + <?php echo $img_categorie[0] ?> + ".1.png";
+            document.getElementById('img_categorie_2').src = "image_objet/" + <?php echo $img_categorie[1] ?> + ".1.png";
+            document.getElementById('img_categorie_3').src = "image_objet/" + <?php echo $img_categorie[2] ?> + ".1.png";
+            
+
+            var img_categorie_1 = <?php echo $img_categorie[0]?>;
+            var img_categorie_2 = <?php echo $img_categorie[1]?>;
+            var img_categorie_3 = <?php echo $img_categorie[2]?>;
+            
+                if(img_categorie_1 == 0)
+                { 
+                    document.getElementById("img_categorie_1").style.visibility = 'hidden';
+                    document.getElementById("img_categorie_1_text").style.visibility = 'hidden';
+                }
+                if(img_categorie_2 == 0)
+                { 
+                    document.getElementById("img_categorie_2").style.visibility = 'hidden';
+                    document.getElementById("img_categorie_2_text").style.visibility = 'hidden';
+                }
+                if(img_categorie_3 == 0)
+                { 
+                    document.getElementById("img_categorie_3").style.visibility = 'hidden';
+                    document.getElementById("img_categorie_3_text").style.visibility = 'hidden';
+                }
+                
+            
+        
+        });
+    </script>
         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
             <div class="container">
                 <div class="col-lg-1">
@@ -25,18 +175,26 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
                     </form>
                 </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion acheteur</button>
-                </div>  
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion vendeur</button>
-                </div>
-  
+                <form method="post" action="Redirect.php">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion"> Deconnexion</button>
+                    </div>
+                </form>
+                <form method="post" action="Redirect.php">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a"> connexion acheteur</button>
+                    </div>
+                </form>
+                <form method="post" action="Redirect.php">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v"> connexion vendeur</button>
+                    </div>
+                </form>
                 <div class="dropdown menu col-lg-1">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Catégories
                     </a>
-                
+              
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="#">scrzfnw</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -64,7 +222,7 @@
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="First slide">
+                        <img id="1_img" class="d-block w-100"  alt="First slide" style="max-height: 500px;">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
@@ -75,7 +233,7 @@
                 <div class="carousel-item">
                     <!--Mask color-->
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(115).jpg" alt="Second slide">
+                        <img id="2_img" class="d-block w-100"  alt="Second slide" style="max-height: 500px;">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
@@ -86,7 +244,7 @@
                 <div class="carousel-item">
                     <!--Mask color-->
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg" alt="Third slide">
+                        <img id="3_img" class="d-block w-100"  alt="Third slide" style="max-height: 500px;">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
@@ -117,7 +275,7 @@
                 <div class="col-lg-8">
                     <form>
                         <div class="form-group">
-                            <textarea class="area_text form-control" id="description" name="nom" rows=5 cols=150 disabled>Valeur par défaut</textarea>
+                            <textarea class="area_text form-control" id="description" name="nom" rows=5 cols=150 disabled><?php echo $data['Description'] ?></textarea>
                             <label for="description"></label>
                         </div>
                     </form>
@@ -125,12 +283,12 @@
                 <div class="col-lg-4">
                         <div class="row">
                             
-                            <div class="col-lg-12 d-flex justify-content-center">
+                            <div id="Enregister" class="col-lg-12 d-flex justify-content-center">
                                 <button type="button" class="btn btn-outline-success btn-primary btn-md">Enregister</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 d-flex justify-content-center">
+                            <div id="Retirer" class="col-lg-12 d-flex justify-content-center">
                                 <button type="button" class="btn btn-outline-danger btn-primary btn-md">Retirer</button>
                             </div>   
                         </div>
@@ -139,38 +297,41 @@
             <div class="row"></div>
             <div class="row">
                 <div class="col-lg-4">
-                    <form>
-                        <textarea name="nom" rows=4 cols=40>Valeur</textarea>
-                    </form>
+                    <p>
+                        Information Vendeur : <br> <br>
+                    <?php echo $data_vendeur['Prenom']?><br>
+                    <?php echo $data_vendeur['Nom']?><br>
+                    <?php echo $data_vendeur['Email']?><br>
+                    </p>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">  
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a href="lights.jpg" target="_blank">
-                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Lights" style="width:100%">
+                                <a id="img_categorie_1_ref" href="lights.jpg" target="_blank">
+                                    <img id="img_categorie_1"  alt="Lights" style="height: 200px">
                                     <div class="caption">
-                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                        <p id="img_categorie_1_text"><?php echo $nom_categorie[0] ?></p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a href="nature.jpg" target="_blank">
-                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"  alt="Nature" style="width:100%">
+                                <a id="img_categorie_2_ref" href="nature.jpg" target="_blank">
+                                    <img id="img_categorie_2"   alt="Nature" style="height: 200px">
                                     <div class="caption">
-                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                        <p id="img_categorie_2_text"><?php echo $nom_categorie[1] ?></p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a href="fjords.jpg" target="_blank">
-                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Fjords" style="width:100%">
+                                <a id="img_categorie_3_ref" href="fjords.jpg" target="_blank">
+                                    <img id="img_categorie_3"  alt="Fjords" style="height: 200px">
                                     <div class="caption">
-                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                        <p id="img_categorie_3_text"><?php echo $nom_categorie[2] ?></p>
                                     </div>
                                 </a>
                             </div>
