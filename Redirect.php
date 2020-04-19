@@ -20,4 +20,5 @@
         $_SESSION['Role'] = 0;
         header("Location: http://goumece/Accueil.php");
     }
+    
 ?>

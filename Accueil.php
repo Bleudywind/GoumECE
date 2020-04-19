@@ -16,11 +16,20 @@
         {
             $_SESSION['Connect'] = 0;
         }
+
+        
+        
+
     ?> 
     <script type="text/javascript">
         var connect = <?php echo $_SESSION['Connect'] ?>;
+        var image_1 = <?php echo $_GET['imgext1']; ?>;
+        var image_2 = <?php echo $_GET['imgext2']; ?>;
+        var image_3 = <?php echo $_GET['imgext3']; ?>;
+        
+        
         $(document).ready(function() {
-            if (connect)
+        if (connect)
         {
             document.getElementById('connect_btn_1').style.visibility = 'hidden';
             document.getElementById('connect_btn_2').style.visibility = 'hidden';
@@ -32,6 +41,13 @@
             document.getElementById('connect_btn_2').style.visibility = 'visible';
             document.getElementById('disconnect').style.visibility = 'hidden';
         }
+
+            document.getElementById('img_1').src = "image_objet/" + image_1;
+            document.getElementById('img_2').src = "image_objet/" + image_2;
+            document.getElementById('img_3').src = "image_objet/" + image_3;
+            document.getElementById('lien_objet_1').href = "http://goumece/page_objet.php? id =" + image_1;
+            document.getElementById('lien_objet_2').href = "http://goumece/page_objet.php? id =" + image_2;
+            document.getElementById('lien_objet_3').href = "http://goumece/page_objet.php? id =" + image_3;
         });
         
     </script>
@@ -143,30 +159,30 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="thumbnail">
-                    <a href="lights.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Lights" style="width:100%">
+                    <a id="lien_objet_1" target="_blank">
+                        <img  id="img_1"  style="height: 200px">
                         <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            <p id="text_img_1"></p>
                         </div>
                     </a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="thumbnail">
-                    <a href="nature.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"  alt="Nature" style="width:100%">
+                    <a id="lien_objet_2" target="_blank">
+                        <img id="img_2"  style="height: 200px">
                         <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            <p id="text_img_1"></p>
                         </div>
                     </a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="thumbnail">
-                    <a href="fjords.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Fjords" style="width:100%">
+                    <a id="lien_objet_3" target="_blank">
+                        <img id="img_3"  style="height: 200px">
                         <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                            <p id="text_img_1"></p>
                         </div>
                     </a>
                 </div>

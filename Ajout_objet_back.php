@@ -26,30 +26,33 @@
             }
             else
             {   
-                
-                 
-                    $sql = "INSERT INTO `objet` (`ID`, `Description`, `Nom`, `Categorie`, `Prix`, `vendeurID`) VALUES (NULL, '$description', '$nom', '$categorie', '$prix', '$vendeur_id')";
-                    mysqli_query($db_handle, $sql);
-                    $sql = "SELECT * FROM objet WHERE vendeurID LIKE '$vendeur_id' AND Nom LIKE '$nom';";
-                    $result = mysqli_query($db_handle, $sql);
-                    $data = mysqli_fetch_assoc($result);
-                    
+                $extension = "";
                     for ($i = 0; $i < 3; $i++)
                     {
                         if($taille[$i][2] == 0)
                         {
                             $type_image[$i] = ".gif";
+                            $extension .= $type_image[$i];
                         }
                         elseif($taille[$i][2] == 1)
                         {
                             $type_image[$i] = ".jpg";
+                            $extension .= $type_image[$i];
                         }
                         else
                         {
                             $type_image[$i] = ".png";
+                            $extension .= $type_image[$i];
                         }
                     }
 
+                    
+
+                    $sql = "INSERT INTO `objet` (`ID`, `Description`, `Nom`, `Categorie`, `Prix`, `extension_img`, `vendeurID`) VALUES (NULL, '$description', '$nom', '$categorie', '$prix', '$extension', '$vendeur_id')";
+                    mysqli_query($db_handle, $sql);
+                    $sql = "SELECT * FROM objet WHERE vendeurID LIKE '$vendeur_id' AND Nom LIKE '$nom';";
+                    $result = mysqli_query($db_handle, $sql);
+                    $data = mysqli_fetch_assoc($result);
 
 
 
