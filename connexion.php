@@ -26,7 +26,9 @@
                         echo "Account not found";
                     }  else {
                         $_SESSION['Connect'] = 1;
-                        header("Location: http://goumece/Accueil.php");               
+                        $data = mysqli_fetch_assoc($result);
+                        $_SESSION['ID'] = $data['ID'];
+                        header("Location: http://goumece/Start_page.php");               
                     }
                 }
                 else
@@ -42,7 +44,9 @@
                         echo "Account not found";
                     }  else {
                         $_SESSION['Connect'] = 1;
-                        header("Location: http://goumece/Accueil.php");               
+                        $data = mysqli_fetch_assoc($result);
+                        $_SESSION['ID'] = $data['ID'];
+                        header("Location: http://goumece/Start_page.php");               
                     }
                 }
                 
