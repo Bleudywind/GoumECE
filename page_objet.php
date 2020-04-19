@@ -135,6 +135,10 @@
             document.getElementById('img_categorie_1').src = "image_objet/" + <?php echo $img_categorie[0] ?> + ".1.png";
             document.getElementById('img_categorie_2').src = "image_objet/" + <?php echo $img_categorie[1] ?> + ".1.png";
             document.getElementById('img_categorie_3').src = "image_objet/" + <?php echo $img_categorie[2] ?> + ".1.png";
+            document.getElementById('img_categorie_1_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[0] ?>;
+            document.getElementById('img_categorie_2_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[1] ?>;
+            document.getElementById('img_categorie_3_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[2] ?>;
+            
             
 
             var img_categorie_1 = <?php echo $img_categorie[0]?>;
@@ -308,7 +312,7 @@
                     <div class="row">  
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a id="img_categorie_1_ref" href="lights.jpg" target="_blank">
+                                <a id="img_categorie_1_ref"  target="_blank">
                                     <img id="img_categorie_1"  alt="Lights" style="height: 200px">
                                     <div class="caption">
                                         <p id="img_categorie_1_text"><?php echo $nom_categorie[0] ?></p>
@@ -318,7 +322,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a id="img_categorie_2_ref" href="nature.jpg" target="_blank">
+                                <a id="img_categorie_2_ref"  target="_blank">
                                     <img id="img_categorie_2"   alt="Nature" style="height: 200px">
                                     <div class="caption">
                                         <p id="img_categorie_2_text"><?php echo $nom_categorie[1] ?></p>
@@ -328,7 +332,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <a id="img_categorie_3_ref" href="fjords.jpg" target="_blank">
+                                <a id="img_categorie_3_ref"  target="_blank">
                                     <img id="img_categorie_3"  alt="Fjords" style="height: 200px">
                                     <div class="caption">
                                         <p id="img_categorie_3_text"><?php echo $nom_categorie[2] ?></p>
