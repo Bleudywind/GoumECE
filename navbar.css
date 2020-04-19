@@ -22,3 +22,9 @@
     justify-content: end;
     margin-left: 400px;
 }
+
+.marge{
+    padding-right:-100000px;
+    padding-left:-500px;
+    padding-inline-start: 0;
+}
