@@ -19,9 +19,19 @@
     {
         if($db_found)
         {
-            $sql = "INSERT INTO `adresse` (`ID`, `Nom`, `Prenom`, `Rue`, `Ville`, `CodePostal`, `Pays`, `Numero`, `Roles`, `IDacheteur`, `IDvendeur`) VALUES (NULL, '$nom', '$prenom', '$rue', '$ville', '$cp', '$pays', '$num', '0', '$id', '0')";
-            mysqli_query($db_handle, $sql);
-            header("Location: http://goumece/connexion_front.php");
+            if ($_SESSION['Role'])
+            {
+                $sql = "INSERT INTO `adresse` (`ID`, `Nom`, `Prenom`, `Rue`, `Ville`, `CodePostal`, `Pays`, `Numero`, `Roles`, `IDacheteur`, `IDvendeur`) VALUES (NULL, '$nom', '$prenom', '$rue', '$ville', '$cp', '$pays', '$num', '1', '0', '$id')";
+                mysqli_query($db_handle, $sql);
+                header("Location: http://goumece/connexion_front.php");
+            }
+            else
+            {
+                $sql = "INSERT INTO `adresse` (`ID`, `Nom`, `Prenom`, `Rue`, `Ville`, `CodePostal`, `Pays`, `Numero`, `Roles`, `IDacheteur`, `IDvendeur`) VALUES (NULL, '$nom', '$prenom', '$rue', '$ville', '$cp', '$pays', '$num', '0', '$id', '0')";
+                mysqli_query($db_handle, $sql);
+                header("Location: http://goumece/connexion_front.php");
+            }
+            
         }
     }
 ?>

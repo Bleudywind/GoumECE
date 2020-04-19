@@ -34,12 +34,17 @@
             document.getElementById('connect_btn_1').style.visibility = 'hidden';
             document.getElementById('connect_btn_2').style.visibility = 'hidden';
             document.getElementById('disconnect').style.visibility = 'visible';
+            if(<?php echo $_SESSION['Role'] ?>)
+            {
+                document.getElementById('add_objet').style.visibility = 'visible';
+            }
         }
         else
         {
             document.getElementById('connect_btn_1').style.visibility = 'visible';
             document.getElementById('connect_btn_2').style.visibility = 'visible';
             document.getElementById('disconnect').style.visibility = 'hidden';
+            document.getElementById('add_objet').style.visibility = 'hidden';
         }
 
             document.getElementById('img_1').src = "image_objet/" + image_1;
@@ -66,24 +71,29 @@
                     <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
-                    <form class="recherche">
-                        <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
+                    <form class="recherche" method="post" action="Redirect.php">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" name="rechercher" type="submit">Search</button>               
                     </form>
                 </div>
                 <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion"> Deconnexion</button>
+                    <div class="col-md-2 mr-1">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion">Deconnexion</button>
+                    </div>
+                </form>
+                <form method="post" action="Redirect.php">
+                    <div class="col-md-2 mr-1">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="add_objet" name="ajouter_objet">Ajouter un Objet</button>
                     </div>
                 </form>
                 <form method="post" action="Redirect.php">
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a"> connexion acheteur</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a">connexion acheteur</button>
                     </div>
                 </form>
                 <form method="post" action="Redirect.php">
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v"> connexion vendeur</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v">connexion vendeur</button>
                     </div>
                 </form>
                 <div class="dropdown menu col-lg-1 mr-0" style="margin-left:100px;">
@@ -92,9 +102,9 @@
                     </a>
               
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">scrzfnw</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Ferraille_ou_Tresors">Ferraille ou Tresors</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Bon_pour_le_Musee">Bon pour le Musee</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Accessoire_VIP">Accessoire VIP</a>
                     </div>
                 </div> 
             </div>            

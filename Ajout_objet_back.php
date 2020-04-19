@@ -10,8 +10,8 @@
     $categorie = isset($_POST["categorie"])? $_POST["categorie"] : "";
     $prix = isset($_POST["prix"])? $_POST["prix"] : "";
     $description = isset($_POST["description"])? $_POST["description"] : "";
-    $vendeur_id = 1; // WARNING ATTENTION PA FINI
-
+    $vendeur_id = $_SESSION['ID']; 
+    
     $database = "projetwd";
     $db_handle = mysqli_connect('localhost', 'root', '');
     $db_found = mysqli_select_db($db_handle, $database);
@@ -46,15 +46,13 @@
                         }
                     }
 
-                    
-
-                    $sql = "INSERT INTO `objet` (`ID`, `Description`, `Nom`, `Categorie`, `Prix`, `extension_img`, `vendeurID`) VALUES (NULL, '$description', '$nom', '$categorie', '$prix', '$extension', '$vendeur_id')";
+                    $sql = "INSERT INTO `objet` (`ID`, `Description`, `Nom`, `Categorie`, `Prix`, `extension_img`, `vendeurID`) VALUES (NULL, '$description', '$nom', '$categorie', '$prix', '$extension', '$vendeur_id');";
                     mysqli_query($db_handle, $sql);
                     $sql = "SELECT * FROM objet WHERE vendeurID LIKE '$vendeur_id' AND Nom LIKE '$nom';";
                     $result = mysqli_query($db_handle, $sql);
                     $data = mysqli_fetch_assoc($result);
 
-
+                    echo $data['ID'];
 
 
                     $chemin = "image_objet/". $data['ID']. ".1".$type_image[0];
@@ -66,7 +64,8 @@
                     $chemin = "image_objet/". $data['ID']. ".3".$type_image[2];
                     $_FILES['image_3']['name'] = $chemin;
                     $retour = copy($_FILES['image_3']['tmp_name'], $_FILES['image_3']['name']);
-                    
+                    $identifiant = $data['ID'];
+                    header("Location: http://goumece/page_objet.php?id=$identifiant");
                                        
                 
             }

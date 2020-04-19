@@ -36,6 +36,11 @@
         $sql = "SELECT * FROM objet WHERE ID LIKE '$id'";
         $result = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($result);
+        $extension_img_1 = substr($data['extension_img'], 0 , -8);
+        $extension_img_2 = substr($data['extension_img'], 4 , -4);
+        $extension_img_3 = substr($data['extension_img'], 8 );
+
+
         $vendeur_id = $data['vendeurID'];
         $sql = "SELECT * FROM vendeur WHERE ID LIKE '$vendeur_id'";
         $result = mysqli_query($db_handle, $sql);
@@ -109,11 +114,13 @@
             {
                 document.getElementById('Enregister').style.visibility = 'visible';
                 document.getElementById('Retirer').style.visibility = 'visible';
+                document.getElementById('description').disabled = false;
             }
             else
             {
                 document.getElementById('Enregister').style.visibility = 'hidden';
                 document.getElementById('Retirer').style.visibility = 'hidden';
+                document.getElementById('description').disabled = true;
             }
 
         }
@@ -126,15 +133,17 @@
             document.getElementById('Retirer').style.visibility = 'hidden';
             
         }
-        document.getElementById('1_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".1.png";
-        document.getElementById('2_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".2.png";
-        document.getElementById('3_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".3.png";
+
+
+        document.getElementById('1_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".1";
+        document.getElementById('2_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".2";       ///// WARNING CA VA PAS DU TOUT DU TOUT
+        document.getElementById('3_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".3";
 
             
         
-            document.getElementById('img_categorie_1').src = "image_objet/" + <?php echo $img_categorie[0] ?> + ".1.png";
-            document.getElementById('img_categorie_2').src = "image_objet/" + <?php echo $img_categorie[1] ?> + ".1.png";
-            document.getElementById('img_categorie_3').src = "image_objet/" + <?php echo $img_categorie[2] ?> + ".1.png";
+            document.getElementById('img_categorie_1').src = "image_objet/" + <?php echo $img_categorie[0] ?> + ".1";
+            document.getElementById('img_categorie_2').src = "image_objet/" + <?php echo $img_categorie[1] ?> + ".1";
+            document.getElementById('img_categorie_3').src = "image_objet/" + <?php echo $img_categorie[2] ?> + ".1";
             document.getElementById('img_categorie_1_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[0] ?>;
             document.getElementById('img_categorie_2_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[1] ?>;
             document.getElementById('img_categorie_3_ref').href = "http://goumece/page_objet.php?id=" + <?php echo $img_categorie[2] ?>;
@@ -166,43 +175,48 @@
         });
     </script>
         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
-            <div class="container">
+            <div class="container ml-5">
                 <div class="col-lg-1">
                     <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
                     <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
-                <div class="col-lg-4">
-                    <form class="recherche">
-                        <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
+                <div class="col-lg-4" style="margin-left:250px">
+                    <form class="recherche" method="post" action="Redirect.php">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" name="rechercher" type="submit">Search</button>               
                     </form>
                 </div>
                 <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion"> Deconnexion</button>
+                    <div class="col-md-2 mr-1">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion">Deconnexion</button>
+                    </div>
+                </form>
+                <form method="post" action="Redirect.php">
+                    <div class="col-md-2 mr-1">
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="add_objet" name="ajouter_objet">Ajouter un Objet</button>
                     </div>
                 </form>
                 <form method="post" action="Redirect.php">
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a"> connexion acheteur</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a">connexion acheteur</button>
                     </div>
                 </form>
                 <form method="post" action="Redirect.php">
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v"> connexion vendeur</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v">connexion vendeur</button>
                     </div>
                 </form>
-                <div class="dropdown menu col-lg-1">
+                <div class="dropdown menu col-lg-1 mr-0" style="margin-left:100px;">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Catégories
                     </a>
               
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">scrzfnw</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Ferraille_ou_Tresors">Ferraille ou Tresors</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Bon_pour_le_Musee">Bon pour le Musee</a>
+                        <a class="dropdown-item" href="http://goumece/Trie.php?rsh=Accessoire_VIP">Accessoire VIP</a>
                     </div>
                 </div> 
             </div>            

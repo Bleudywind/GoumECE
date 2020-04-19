@@ -35,9 +35,9 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <select class="form-control" id="exampleFormControlSelect1" name="categorie">
-                                            <option>Aucune catégorie</option>
-                                            <option>Ferraille ou Trésors</option>
-                                            <option>Bon pour le Musée</option>
+                                            <option>Aucune categorie</option>
+                                            <option>Ferraille ou Tresors</option>
+                                            <option>Bon pour le Musee</option>
                                             <option>Accessoire VIP</option>
                                         </select>
                                         <label for="exampleFormControlSelect2">Catégorie</label>

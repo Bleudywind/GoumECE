@@ -20,5 +20,14 @@
         $_SESSION['Role'] = 0;
         header("Location: http://goumece/Start_page.php");
     }
+    if(isset($_POST["ajouter_objet"]))
+    {
+        header("Location: http://goumece/Ajout_objet_front.php");
+    }
+    if(isset($_POST["rechercher"]))
+    {
+        $search = $_POST['search'];
+        header("Location: http://goumece/Trie.php?rsh=$search");
+    }
     
 ?>
