@@ -7,34 +7,9 @@
         <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="navbar.css">
+        <link rel="stylesheet" type="text/css" href="page_objet.css">
     </head>
     <body>
-    <?php
-        session_start();
-        if (!isset($_SESSION['Connect']))
-        {
-            $_SESSION['Connect'] = 0;
-        }
-    ?> 
-    <script type="text/javascript">
-        var connect = <?php echo $_SESSION['Connect'] ?>;
-        $(document).ready(function() {
-            if (connect)
-        {
-            document.getElementById('connect_btn_1').style.visibility = 'hidden';
-            document.getElementById('connect_btn_2').style.visibility = 'hidden';
-            document.getElementById('disconnect').style.visibility = 'visible';
-        }
-        else
-        {
-            document.getElementById('connect_btn_1').style.visibility = 'visible';
-            document.getElementById('connect_btn_2').style.visibility = 'visible';
-            document.getElementById('disconnect').style.visibility = 'hidden';
-        }
-        });
-        
-    </script>
         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
             <div class="container">
                 <div class="col-lg-1">
@@ -49,26 +24,18 @@
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
                     </form>
                 </div>
-                <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion"> Deconnexion</button>
-                    </div>
-                </form>
-                <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_1" name="connexion_a"> connexion acheteur</button>
-                    </div>
-                </form>
-                <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="connect_btn_2" name="connexion_v"> connexion vendeur</button>
-                    </div>
-                </form>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion acheteur</button>
+                </div>  
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-outline-secondary btn-primary btn-md"> connexion vendeur</button>
+                </div>
+  
                 <div class="dropdown menu col-lg-1">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Catégories
                     </a>
-              
+                
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="#">scrzfnw</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -77,8 +44,13 @@
                 </div> 
             </div>            
         </nav>
-      
-<!--galerie defillante-->
+        <div class="container">
+            <div class="row"></div>
+        </div>           
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--galerie defillante-->
 
     
         <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel" >
@@ -138,40 +110,73 @@
                 <a class="black-text" href="#multi-item-example" data-slide="next"><i class="fas fa-angle-right fa-3x pl-3"></i></a>
             </div>
             <!--/.Controls-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="area_text form-control" id="description" name="nom" rows=5 cols=150 disabled>Valeur par défaut</textarea>
+                            <label for="description"></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                        <div class="row">
+                            
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-success btn-primary btn-md">Enregister</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-danger btn-primary btn-md">Retirer</button>
+                            </div>   
+                        </div>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <form>
+                        <textarea name="nom" rows=4 cols=40>Valeur</textarea>
+                    </form>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">  
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <a href="lights.jpg" target="_blank">
+                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Lights" style="width:100%">
+                                    <div class="caption">
+                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <a href="nature.jpg" target="_blank">
+                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"  alt="Nature" style="width:100%">
+                                    <div class="caption">
+                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <a href="fjords.jpg" target="_blank">
+                                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Fjords" style="width:100%">
+                                    <div class="caption">
+                                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
         </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="lights.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Lights" style="width:100%">
-                        <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="nature.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"  alt="Nature" style="width:100%">
-                        <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="fjords.jpg" target="_blank">
-                        <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="Fjords" style="width:100%">
-                        <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>

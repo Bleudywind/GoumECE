@@ -66,12 +66,24 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-lg-1"></div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="img_1" name="image_1">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <label class="custom-file-label" for="customFile">Choisir l'image 1</label>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="img_2" name="image_2">
+                                        <label class="custom-file-label" for="customFile">Choisir l'image 2</label>
+                                    </div>
+                                </div> 
+                                <div class="col-lg-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="img_3" name="image_3">
+                                        <label class="custom-file-label" for="customFile">Choisir l'image 3</label>
+                                    </div>
+                                </div>                               
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-flex justify-content-center">
