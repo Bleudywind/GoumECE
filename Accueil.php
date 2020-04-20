@@ -69,14 +69,14 @@
          <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
             <div class="container ml-5">
                 <div class="col-lg-1">
-                    <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
+                    <a class="nav_logo" href="panier.php"><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
                     <a class="nav_logo" href="http://goumece/Start_page.php"><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
                     <form class="recherche" method="post" action="Redirect.php">
-                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-1" name="search" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" name="rechercher" type="submit">Search</button>               
                     </form>
                 </div>

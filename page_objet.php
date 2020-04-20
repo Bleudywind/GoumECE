@@ -42,7 +42,22 @@
         {
             $enchere = 0;
         }
-        
+        if (isset($_GET['panier']))
+        {
+            $panier = $_GET['panier'];
+        }
+        else
+        {
+            $panier = "non";
+        }
+        if (isset($_GET['delete']))
+        {
+            $delete = 1;
+        }
+        else
+        {
+            $delete = 0;
+        }
 
         $sql = "SELECT * FROM objet WHERE ID LIKE '$id'";
         $result = mysqli_query($db_handle, $sql);
@@ -59,6 +74,24 @@
         $sql = "SELECT * FROM vendeur WHERE ID LIKE '$vendeur_id'";
         $result = mysqli_query($db_handle, $sql);
         $data_vendeur = mysqli_fetch_assoc($result);
+
+        $sql ="SELECT * FROM panier WHERE objetID LIKE '$id'";
+        $result = mysqli_query($db_handle, $sql);
+        $affichage_panier = 1;
+        $j = 0;
+        while ($data_panier = mysqli_fetch_assoc($result))
+        {
+            $j++;
+            if ($data_panier['acheteurID'] == $guest_id || $_SESSION['Role'])
+            {
+                $affichage_panier = 0;
+            }
+        }
+
+        if ($j == 0 && $_SESSION['Role'])
+        {
+            $affichage_panier = 0;
+        }
 
         $categorie = $data['Categorie'];
         $sql = "SELECT * FROM objet WHERE Categorie LIKE '$categorie'";
@@ -84,13 +117,32 @@
             }
         }
 
+        if($panier == "add")
+        {
+            $sql = "INSERT INTO panier (ID, acheteurID, objetID) VALUES (NULL, $guest_id, '$id')";
+            mysqli_query($db_handle, $sql);
+            header("Location: http://goumece/page_objet.php?id=$id");
+            $panier = "non";
+        }
+        
+        if($delete)
+        {
+            $sql = "DELETE FROM `objet` WHERE `objet`.`ID` = '$id'";
+            mysqli_query($db_handle, $sql);
+            $sql = "DELETE FROM `enchere` WHERE `enchere`.`objetID` = '$id'";
+            mysqli_query($db_handle, $sql);
+            $sql = "DELETE FROM `panier` WHERE `panier`.`objetID` = '$id'";
+            mysqli_query($db_handle, $sql);
+            header("Location: http://goumece/Start_page.php");
+        }
+
+
         if($enchere > $data['Prix'])
         {
             if($enchere > $data_enchere['Prix'])
             {
                 $nouveau_prix = $data_enchere['Prix'] + 1;
                 $nouveau_prix_enchere = $enchere; 
-                echo $guest_id;
                 $sql = "UPDATE `enchere` SET `Prix` = '$nouveau_prix_enchere' , `acheteurID` = '$guest_id'  WHERE `enchere`.`objetID` = '$id'";
                 $result = mysqli_query($db_handle, $sql);       
             }
@@ -129,21 +181,20 @@
 
         $img_categorie_size = sizeof($img_categorie);
 
-        if(!$guest_id)
+        if($guest_id == 0)
         {
             $autorisation = 0;
         }
         elseif ($_SESSION['Role'])
         {
-            $sql = "SELECT * FROM vendeur WHERE ID LIKE '$guest_id'";
-            $result = mysqli_query($db_handle, $sql);
-            if(mysqli_num_rows($result) == 0)
+            
+            if($guest_id == $data['vendeurID'])
             {
-                $autorisation = 0;
+                $autorisation = 1;
             }
             else
             {
-                $autorisation = 1;
+                $autorisation = 0;
             }
         }
         elseif ($_SESSION['Role'] == 2)
@@ -186,25 +237,32 @@
             
             if (<?php echo $autorisation ?>)
             {
-                document.getElementById('Enregister').style.visibility = 'visible';
                 document.getElementById('Retirer').style.visibility = 'visible';
                 document.getElementById('description').disabled = false;
             }
             else
             {
-                document.getElementById('Enregister').style.visibility = 'hidden';
                 document.getElementById('Retirer').style.visibility = 'hidden';
                 document.getElementById('description').disabled = true;
+            }
+
+            if (<?php echo $affichage_panier ?>)
+            {
+                document.getElementById('add_panier').style.visibility = 'visible';
+            }
+            else
+            {
+                document.getElementById('add_panier').style.visibility = 'hidden';
             }
 
         }
         else
         {
+            document.getElementById('add_panier').style.visibility = 'hidden';
             document.getElementById('add_objet').style.visibility = 'hidden';
             document.getElementById('connect_btn_1').style.visibility = 'visible';
             document.getElementById('connect_btn_2').style.visibility = 'visible';
             document.getElementById('disconnect').style.visibility = 'hidden';
-            document.getElementById('Enregister').style.visibility = 'hidden';
             document.getElementById('Retirer').style.visibility = 'hidden';
             
         }
@@ -267,20 +325,36 @@
                 }
 
             });
+
+            $('#add_panier').click(function(){
+
+                window.location.href ="http://goumece/page_objet.php?id=" + <?php echo $data['ID'] ?> + "&panier=add";
+
+            });
         
+            $('#delete').click(function(){
+
+                resultat_delete = window.prompt("êtes vous sûr de vouloir supprimer cette objet ? (écrire EFFACER pour supprimer l'objet)");
+                if (resultat_delete == "EFFACER")
+                {
+                    window.location.href ="http://goumece/page_objet.php?id=" + <?php echo $data['ID'] ?> + "&delete=add";
+                }
+            });
+
+            
         });
     </script>
         <nav class="navbar navbar-expand-md" style=" background: #FFCE2B">
             <div class="container ml-5">
                 <div class="col-lg-1">
-                    <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
+                    <a class="nav_logo" href="panier.php"><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
                     <a class="nav_logo" href="http://goumece/Start_page.php"><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
                     <form class="recherche" method="post" action="Redirect.php">
-                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-0" name="search" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" name="rechercher" type="submit">Search</button>               
                     </form>
                 </div>
@@ -390,7 +464,7 @@
                 <div class="col-lg-7">
                     <form>
                         <div class="form-group">
-                            <textarea class="area_text form-control" id="description" name="nom" rows=7 cols=100 disabled><?php echo $data['Description'] ?></textarea>
+                            <textarea class="area_text form-control"  id="description"  rows=7 cols=100 disabled><?php echo $data['Description'] ?></textarea>
                             <label for="description"></label>
                         </div>
                     </form>
@@ -414,13 +488,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div id="Enregister" class="col-lg-12 d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-success btn-primary btn-md">Enregister</button>
+                        <div id="ajout_panier" class="col-lg-12 d-flex justify-content-center">
+                        <a class="btn btn-outline-success btn-primary btn-md" id="add_panier" role="button">Ajouter au panier</a>
                         </div>
                     </div>
                     <div class="row">
                         <div id="Retirer" class="col-lg-12 d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-danger btn-primary btn-md">Retirer</button>
+                            <a class="btn btn-outline-primary btn-primary btn-md" id="delete" role="button">Retirer</a>
                         </div>
                     </div>
                 </div>

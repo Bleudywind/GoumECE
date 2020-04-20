@@ -57,11 +57,10 @@
                     $sql = "INSERT INTO `objet` (`ID`, `Description`, `Nom`, `Categorie`, `Prix`, `extension_img`, `vendeurID`) VALUES (NULL, '$description', '$nom', '$categorie', '$prix', '$extension', '$vendeur_id');";
                     mysqli_query($db_handle, $sql);
                     
-                    echo $date_fin_enchere;
+
                     $heure_fin_enchere = substr($date_fin_enchere, 11);
                     $date_fin_enchere = substr($date_fin_enchere, 0, -6);
-                    echo $date_fin_enchere;
-                    echo $heure_fin_enchere;
+
                     $sql = "SELECT * FROM objet WHERE vendeurID LIKE '$vendeur_id' AND Nom LIKE '$nom';";
                     $result = mysqli_query($db_handle, $sql);
                     $data = mysqli_fetch_assoc($result);
