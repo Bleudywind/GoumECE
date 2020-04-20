@@ -25,12 +25,21 @@
             document.getElementById('connect_btn_1').style.visibility = 'hidden';
             document.getElementById('connect_btn_2').style.visibility = 'hidden';
             document.getElementById('disconnect').style.visibility = 'visible';
+            if(<?php echo $_SESSION['Role'] ?>)
+            {
+                document.getElementById('add_objet').style.visibility = 'visible';
+            }
+            else
+            {
+                document.getElementById('add_objet').style.visibility = 'hidden';
+            }
         }
         else
         {
             document.getElementById('connect_btn_1').style.visibility = 'visible';
             document.getElementById('connect_btn_2').style.visibility = 'visible';
             document.getElementById('disconnect').style.visibility = 'hidden';
+            document.getElementById('add_objet').style.visibility = 'hidden';
         }
         });
         

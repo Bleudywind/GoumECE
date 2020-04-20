@@ -16,6 +16,7 @@
     }
     if(isset($_POST["deconnexion"]))
     {
+        $_SESSION['ID'] = 0;
         $_SESSION['Connect'] = 0;
         $_SESSION['Role'] = 0;
         header("Location: http://goumece/Start_page.php");

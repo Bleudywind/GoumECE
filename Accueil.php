@@ -38,6 +38,10 @@
             {
                 document.getElementById('add_objet').style.visibility = 'visible';
             }
+            else
+            {
+                document.getElementById('add_objet').style.visibility = 'hidden';
+            }
         }
         else
         {
@@ -68,7 +72,7 @@
                     <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
-                    <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
+                    <a class="nav_logo" href="http://goumece/Start_page.php"><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
                     <form class="recherche" method="post" action="Redirect.php">

@@ -156,6 +156,14 @@
             document.getElementById('connect_btn_1').style.visibility = 'hidden';
             document.getElementById('connect_btn_2').style.visibility = 'hidden';
             document.getElementById('disconnect').style.visibility = 'visible';
+            if(<?php echo $_SESSION['Role'] ?>)
+            {
+                document.getElementById('add_objet').style.visibility = 'visible';
+            }
+            else
+            {
+                document.getElementById('add_objet').style.visibility = 'hidden';
+            }
             
             if (<?php echo $autorisation ?>)
             {
@@ -173,6 +181,7 @@
         }
         else
         {
+            document.getElementById('add_objet').style.visibility = 'hidden';
             document.getElementById('connect_btn_1').style.visibility = 'visible';
             document.getElementById('connect_btn_2').style.visibility = 'visible';
             document.getElementById('disconnect').style.visibility = 'hidden';
@@ -248,7 +257,7 @@
                     <a class="nav_logo" href=""><img src="Panier.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-1">
-                    <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
+                    <a class="nav_logo" href="http://goumece/Start_page.php"><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
                     <form class="recherche" method="post" action="Redirect.php">
