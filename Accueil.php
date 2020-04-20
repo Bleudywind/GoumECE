@@ -127,34 +127,34 @@
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="First slide">
+                        <img class="d-block w-100" src="frip.jpg" alt="First slide" style="height:700px">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">This is the first title</h3>
-                        <p>First text</p>
+                        <h3 class="h3-responsive">Notre objectif </h3>
+                        <p>On aimerait que notre plateforme vous permette d'avoir accès à des produits exceptionnels à moindre coût</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <!--Mask color-->
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(115).jpg" alt="Second slide">
+                        <img class="d-block w-100" src="secondevie.jpg" alt="Second slide" style="height:700px; width:1000px">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">Thir is the second title</h3>
-                        <p>Secondary text</p>
+                        <h3 class="h3-responsive">Une nouvelle approche de la consommation</h3>
+                        <p>On souhaite prolonger la vie des objets qui nous entourent, et ne plus simplement acheter pour jeter</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <!--Mask color-->
                     <div class="view">
-                        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg" alt="Third slide">
+                        <img class="d-block w-100" src="team.jpg" alt="Third slide" style="height:700px;width:1000px">
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">This is the third title</h3>
-                        <p>Third text</p>
+                        <h3 class="h3-responsive">Notre équipe </h3>
+                        <p>Nous somme deux jeunes ingénieurs pleins d'entrain dans cette démarche afin de faire bouger les choses dès aujourd'hui</p>
                     </div>
                 </div>
             </div>
