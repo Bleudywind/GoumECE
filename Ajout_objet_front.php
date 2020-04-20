@@ -64,26 +64,53 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <div class="form-row d-flex justify-content-center">
                                 <div class="col-lg-1"></div>
                                 <div class="col-lg-3">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="img_1" name="image_1">
+                                        <input type="file" class="custom-file-input" id="img_1" name="image_1" required>
                                         <label class="custom-file-label" for="customFile">Choisir l'image 1</label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="img_2" name="image_2">
+                                        <input type="file" class="custom-file-input" id="img_2" name="image_2" required>
                                         <label class="custom-file-label" for="customFile">Choisir l'image 2</label>
                                     </div>
                                 </div> 
                                 <div class="col-lg-3">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="img_3" name="image_3">
+                                        <input type="file" class="custom-file-input" id="img_3" name="image_3" required>
                                         <label class="custom-file-label" for="customFile">Choisir l'image 3</label>
                                     </div>
                                 </div>                               
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="Enchere" id="Enchere_btn">
+                                        <label class="custom-control-label" for="Enchere_btn">Enchère</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="achat_imm" id="Achat_immediat_btn">
+                                        <label class="custom-control-label" for="Achat_immediat_btn">Achat immédiat</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" name="best_offer" id="Meilleur_offre_btn">
+                                        <label class="custom-control-label" for="Meilleur_offre_btn">Meilleur offre</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-4,5">
+                                    <label for="date_fin" class="custom-label">Date et heure de fin de l'enchèrere</label>
+                                        <input class="form-control" type="datetime-local" name="date_fin_enchere" id="date_fin" required>        
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-flex justify-content-center">
