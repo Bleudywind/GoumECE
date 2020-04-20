@@ -96,7 +96,15 @@
             }
             else
             {
-                $nouveau_prix = $enchere + 1;
+                if($enchere == $data_enchere['Prix'])
+                {
+                    $nouveau_prix = $enchere;
+                }
+                else
+                {
+                    $nouveau_prix = $enchere + 1;
+                }
+                
             }
 
             $sql = "UPDATE `objet` SET `Prix` = '$nouveau_prix' WHERE `objet`.`ID` = '$id'";
@@ -106,9 +114,13 @@
             header("Location: http://goumece/page_objet.php?id=$id");
         }
 
-        if($data_enchere['acheteurID'] == $_SESSION ['ID'])
+        if($data_enchere['acheteurID'] == $_SESSION ['ID'] &&  $_SESSION['Role'] == 0)
         {
             $id_enchere = "Vous êtes actuellement en tête de l'enchère !";
+        }
+        elseif ($_SESSION['Role'])
+        {
+            $id_enchere = "";
         }
         else
         {
@@ -159,9 +171,16 @@
             if(<?php echo $_SESSION['Role'] ?>)
             {
                 document.getElementById('add_objet').style.visibility = 'visible';
+                document.getElementById('Encherir').style.visibility = 'hidden';
+                document.getElementById('Achat_immediat').style.visibility = 'hidden';
+                document.getElementById('Meilleur_enchere').style.visibility = 'hidden';
+                
             }
             else
             {
+                document.getElementById('Encherir').style.visibility = 'visible';
+                document.getElementById('Achat_immediat').style.visibility = 'visible';
+                document.getElementById('Meilleur_enchere').style.visibility = 'visible';
                 document.getElementById('add_objet').style.visibility = 'hidden';
             }
             
@@ -300,6 +319,7 @@
         </nav>
         <div class="container">
             <div class="row"></div>
+            <div class="row d-flex justify-content-center"><h2><?php echo $data['Nom'] ?></h2></div>
         </div>           
         <div class="container">
             <div class="row">
