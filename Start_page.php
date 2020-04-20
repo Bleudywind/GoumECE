@@ -1,5 +1,11 @@
 <?php
 
+    session_start();
+    if (!isset($_SESSION['Connect']))
+    {
+        $_SESSION['Connect'] = 0;
+    }
+    
     $database = "projetwd";
     $db_handle = mysqli_connect('localhost', 'root', '');
     $db_found = mysqli_select_db($db_handle, $database);

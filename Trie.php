@@ -44,18 +44,18 @@
                     <a class="nav_logo" href=""><img src="logo.png" style=" height: 50px;width: auto;"></a>
                 </div>
                 <div class="col-lg-4" style="margin-left:250px">
-                    <form class="recherche">
-                        <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>               
+                    <form class="recherche" method="post" action="Redirect.php">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" name="rechercher" type="submit">Search</button>               
                     </form>
                 </div>
                 <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
+                    <div class="col-md-2 mr-1">
                         <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="disconnect" name="deconnexion">Deconnexion</button>
                     </div>
                 </form>
                 <form method="post" action="Redirect.php">
-                    <div class="col-md-2">
+                    <div class="col-md-2 mr-1">
                         <button type="submit" class="btn btn-outline-secondary btn-primary btn-md" id="add_objet" name="ajouter_objet">Ajouter un Objet</button>
                     </div>
                 </form>
@@ -88,7 +88,6 @@
             $db_found = mysqli_select_db($db_handle, $database);
             $research = $_GET['rsh'];
             
-            
                 if($db_found)
                 {
                     if ($research == "Ferraille_ou_Tresors" || $research == "Bon_pour_le_Musee" || $research == "Accessoire_VIP")
@@ -118,7 +117,7 @@
                                             echo'<h5>'.$data['Description'] .'</h5>'.'<br>';
                                         echo'</div>';
                                         echo'<div class="col-md-4">';
-                                            echo'<h2>'.$data['Prix'].'</h2>'.'<br>';
+                                            echo'<h2>'.$data['Prix'].'€'.'</h2>'.'<br>';
                                             echo '<a class="btn btn-secondary" href="http://goumece/page_objet.php?id='.$id.'" role="button">'.'Plus de détails'.'</a>';
                                         echo'</div>';
                                     echo'</div>';

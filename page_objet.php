@@ -33,6 +33,17 @@
         $db_handle = mysqli_connect('localhost', 'root', '');
         $db_found = mysqli_select_db($db_handle, $database);
 
+
+        if (isset($_GET['enchere']))
+        {
+            $enchere = $_GET['enchere'];
+        }
+        else
+        {
+            $enchere = 0;
+        }
+        
+
         $sql = "SELECT * FROM objet WHERE ID LIKE '$id'";
         $result = mysqli_query($db_handle, $sql);
         $data = mysqli_fetch_assoc($result);
@@ -40,6 +51,9 @@
         $extension_img_2 = substr($data['extension_img'], 4 , -4);
         $extension_img_3 = substr($data['extension_img'], 8 );
 
+        $sql = "SELECT * FROM enchere WHERE objetID LIKE '$id'";
+        $result = mysqli_query($db_handle, $sql);
+        $data_enchere = mysqli_fetch_assoc($result);
 
         $vendeur_id = $data['vendeurID'];
         $sql = "SELECT * FROM vendeur WHERE ID LIKE '$vendeur_id'";
@@ -68,6 +82,37 @@
                 $nom_categorie[$i] = 0;
                 $img_categorie[$i] = 0;
             }
+        }
+
+        if($enchere > $data['Prix'])
+        {
+            if($enchere > $data_enchere['Prix'])
+            {
+                $nouveau_prix = $data_enchere['Prix'] + 1;
+                $nouveau_prix_enchere = $enchere; 
+                echo $guest_id;
+                $sql = "UPDATE `enchere` SET `Prix` = '$nouveau_prix_enchere' , `acheteurID` = '$guest_id'  WHERE `enchere`.`objetID` = '$id'";
+                $result = mysqli_query($db_handle, $sql);       
+            }
+            else
+            {
+                $nouveau_prix = $enchere + 1;
+            }
+
+            $sql = "UPDATE `objet` SET `Prix` = '$nouveau_prix' WHERE `objet`.`ID` = '$id'";
+            $result = mysqli_query($db_handle, $sql);
+
+            
+            header("Location: http://goumece/page_objet.php?id=$id");
+        }
+
+        if($data_enchere['acheteurID'] == $_SESSION ['ID'])
+        {
+            $id_enchere = "Vous êtes actuellement en tête de l'enchère !";
+        }
+        else
+        {
+            $id_enchere = "Vous n'êtes pas en tête de l'enchère.";
         }
 
         $img_categorie_size = sizeof($img_categorie);
@@ -103,6 +148,8 @@
         var connect = <?php echo $_SESSION['Connect'] ?>;
         
 
+        
+
         $(document).ready(function() {
         if (connect)
         {
@@ -133,6 +180,7 @@
             document.getElementById('Retirer').style.visibility = 'hidden';
             
         }
+
 
 
         document.getElementById('1_img').src = "image_objet/" + <?php echo $_GET['id'] ?> + ".1";
@@ -170,7 +218,27 @@
                     document.getElementById("img_categorie_3_text").style.visibility = 'hidden';
                 }
                 
-            
+            $('#Encherir').click(function(){
+                
+                if (<?php echo $_SESSION['Connect'] ?>)
+                {
+                    resultat_enchere = window.prompt("Veuillez entrer la valeur de votre enchère automatique :");
+                    if(resultat_enchere > <?php echo $data['Prix'] ?>)
+                    {
+                        alert("Votre enchère a été comptabilisé");
+                        window.location.href ="http://goumece/page_objet.php?id=" + <?php echo $data['ID'] ?> + "&enchere=" + resultat_enchere;
+                    }
+                    else
+                    {
+                        alert("Enchère trop basse !");
+                    }
+                }
+                else
+                {
+                    alert ("connectez-vous pour continuer");
+                }
+
+            });
         
         });
     </script>
@@ -244,8 +312,8 @@
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">This is the first title</h3>
-                        <p>First text</p>
+                        <h3 class="h3-responsive"></h3>
+                        <p></p>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -255,8 +323,8 @@
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">Thir is the second title</h3>
-                        <p>Secondary text</p>
+                        <h3 class="h3-responsive"></h3>
+                        <p></p>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -266,8 +334,8 @@
                         <div class="mask rgba-black-light"></div>
                     </div>
                     <div class="carousel-caption">
-                        <h3 class="h3-responsive">This is the third title</h3>
-                        <p>Third text</p>
+                        <h3 class="h3-responsive"></h3>
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -290,31 +358,47 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <form>
                         <div class="form-group">
-                            <textarea class="area_text form-control" id="description" name="nom" rows=5 cols=150 disabled><?php echo $data['Description'] ?></textarea>
+                            <textarea class="area_text form-control" id="description" name="nom" rows=7 cols=100 disabled><?php echo $data['Description'] ?></textarea>
                             <label for="description"></label>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-4">
-                        <div class="row">
-                            
-                            <div id="Enregister" class="col-lg-12 d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-success btn-primary btn-md">Enregister</button>
-                            </div>
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div id="date-enchère" class="col-lg-12 d-flex justify-content-center">
+                            <p>
+                                Date de fin d'enchère le <?php echo $data_enchere['DateFin'] ?> à <?php echo $data_enchere['Heure']?> <br>
+                                Prix actuelle = <?php echo $data['Prix'] ?> <br>
+                                <?php echo $id_enchere ?>
+                            </p>
                         </div>
-                        <div class="row">
-                            <div id="Retirer" class="col-lg-12 d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-danger btn-primary btn-md">Retirer</button>
-                            </div>   
+                    </div>
+                    
+                    <div class="row">
+                        <div id="Enchere" class="col-lg-12 d-flex justify-content-center">
+                            <a class="btn btn-outline-primary btn-primary btn-md" id="Encherir" role="button">Encherère automatique</a>
+                            <a class="btn btn-outline-info btn-primary btn-md" id="Achat_immediat" role="button">Achat immediat</a>
+                            <a class="btn btn-outline-primary btn-primary btn-md" id="Meilleur_enchere" role="button">Meilleur enchère</a>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div id="Enregister" class="col-lg-12 d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-success btn-primary btn-md">Enregister</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="Retirer" class="col-lg-12 d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-danger btn-primary btn-md">Retirer</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row"></div>
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 d-flex justify-content-center">
                     <p>
                         Information Vendeur : <br> <br>
                     <?php echo $data_vendeur['Prenom']?><br>
