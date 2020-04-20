@@ -35,7 +35,7 @@
         });
         
     </script>
-   <?php include("menus.php"); ?>
+   <?php include("nav.php"); ?>
       <?php
             $database = "projetwd";
             $db_handle = mysqli_connect('localhost', 'root', '');
